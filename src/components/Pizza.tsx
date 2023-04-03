@@ -1,6 +1,6 @@
 import React from 'react';
 import PizzaCSS from './Pizza.module.css';
-import { useSetState } from './AppState';
+import { useStateDispatch } from './AppState';
 
 interface Pizza {
   id: number;
@@ -14,9 +14,14 @@ interface Props {
 }
 
 const Pizza: React.FC<Props> = ({ pizza }) => {
-  const setState = useSetState();
+  const dispatch = useStateDispatch();
   const handleAddToCartClick = () => {
-    
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: {
+        item: {id: pizza.id, name: pizza.name, price: pizza.price },
+      }
+    })
   };
   return (
     <li className={PizzaCSS.container}>
